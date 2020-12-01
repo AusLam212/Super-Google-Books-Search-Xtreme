@@ -8,22 +8,20 @@ import SearchedBook from "../components/SearchedBook"
 function Search() {
 
   const [search, setSearch] = useState("");
-  const [book, setBook] = useState({});
   const [books, setBooks] = useState({});
+
 
   function handleInputChange(event) {
     const { value } = event.target;
-    setSearch(value);
+    setSearch({ value });
   }
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    API.getBook(search)
+    API.getBook(search.value)
       .then(res => {
-        console.log(res.data);
-        setBook(res.data);
+        setBooks(res.data.items);
       })
-      .then(setSearch(""))
       .catch(err => console.log(err))
   }
 
@@ -32,19 +30,22 @@ function Search() {
       <div className="row">
         <div className="col-12">
           <Jumbotron>
-            <h1>Search:</h1>
+            <h2>Search:</h2>
             <Form onChange={handleInputChange} onClick={handleFormSubmit} />
           </Jumbotron>
         </div>
       </div>
-      {book.length ? (
-        <SearchedBook
-          title={book.title}
-          authors={book.authors}
-          image={book.image}
-          description={book.description}
-          link={book.link}
-        />
+      {books.length ? (
+        books.map(book => (
+          <SearchedBook
+            key={book.id}
+            id={book.id}
+            title={book.volumeInfo.title}
+            authors={book.volumeInfo.authors}
+            description={book.volumeInfo.description}
+            link={book.volumeInfo.infoLink}
+          />
+        ))
       ) : (
         <h3 style={{ textAlign: "center" }}>No Results to Display</h3>
       )}

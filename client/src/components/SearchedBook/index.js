@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import API from "../../utils/API";
 
 function SearchedBook(props) {
+
+    const [savedBooks, setSavedBooks] = useState([]);
+
+    useEffect(() => {
+        API.savedBooks()
+            .then(savedBooks => setSavedBooks({ savedBooks: savedBooks }))
+            .catch(err => console.error(err));
+    }, {})
+
     return (
-        <div className="row">
-            <div className="col-sm-12 col-md-2">
-                <img src={props.image} alt="Book Cover" style={{ height: "100px", width: "60px" }} />
-            </div>
-            <div className="col-sm-12 col-md-10">
-                <h2>{props.title}</h2>
-                <h3>{props.authors}</h3>
+        <div className="row" style={{ margin: " 10px 10px" }}>
+            <div className="col-12">
+                <h3>{props.title}</h3>
+                <h5>{props.authors}</h5>
                 <p>{props.description}</p>
                 <Link to={{ pathname: props.link }} target="_blank" >
-                    {props.link}
+                    Read Here
                 </Link>
+                <button onClick={() => handleSave(result)} className="btn badge-pill btn-outline-warning mt-3 ml-3" >
+                    {savedBooks.map(book => book._id).includes(result._id) ? "Unsave" : "Save"}
+                </button>
             </div>
         </div>
     );
