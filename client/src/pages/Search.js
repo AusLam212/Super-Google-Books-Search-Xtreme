@@ -10,19 +10,38 @@ function Search() {
   const [search, setSearch] = useState("");
   const [books, setBooks] = useState({});
 
-
   function handleInputChange(event) {
+    event.preventDefault();
     const { value } = event.target;
     setSearch({ value });
   }
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    API.getBook(search.value)
+    if (search !== "") {
+      API.getBook(search.value)
       .then(res => {
         setBooks(res.data.items);
       })
       .catch(err => console.log(err))
+    }
+  }
+
+  function handleSave(result) {
+    console.log(result)
+    API.saveBook({
+      bookid: result.id,
+      title: result.volumeInfo.title,
+      authors: result.volumeInfo.authors,
+      description: result.volumeInfo.description,
+      link: result.volumeInfo.infoLink
+    })
+      .then(
+        res => {
+          console.log(res)
+        }
+      )
+      .catch(err => console.error(err));
   }
 
   return(
@@ -44,7 +63,11 @@ function Search() {
             authors={book.volumeInfo.authors}
             description={book.volumeInfo.description}
             link={book.volumeInfo.infoLink}
-          />
+          >
+            <button  className="btn btn-success" style={{ marginLeft: "10px" }} onClick={() => handleSave(book)}>
+              Save
+            </button>
+          </SearchedBook>
         ))
       ) : (
         <h3 style={{ textAlign: "center" }}>No Results to Display</h3>

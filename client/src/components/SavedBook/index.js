@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function SearchedBook(props) {
-
-
+function SavedBook(props) {
     return (
         <div className="row" style={{ margin: " 10px 10px" }}>
             <div className="col-sm-12 col-md-10">
@@ -19,4 +17,5 @@ function SearchedBook(props) {
     );
 }
 
-export default SearchedBook;
+
+export default SavedBook;
