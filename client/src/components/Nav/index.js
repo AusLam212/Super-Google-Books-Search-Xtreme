@@ -19,20 +19,20 @@ function Nav() {
           Google Book Search
         </span>
       </Link>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent" class={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`}> 
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item dropdown text-light">
-                        <Link to="/" className={location.pathname === "/" ? "nav-link active" : "nav-link"}>
-                            Search
-                        </Link>
-                    </li>
-                    <li className="nav-item dropdown">
-                        <Link to="/books" className={location.pathname === "/books" ? "nav-link active" : "nav-link"}>
-                            Saved
-                        </Link>
-                    </li>
-                </ul>
-            </div>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent"> 
+        <ul className="navbar-nav ml-auto">
+            <li className="nav-item dropdown text-light">
+                <Link to="/" className={location.pathname === "/" ? "nav-link active" : "nav-link"}>
+                    Search
+                </Link>
+            </li>
+            <li className="nav-item dropdown">
+                <Link to="/books" className={location.pathname === "/books" ? "nav-link active" : "nav-link"}>
+                    Saved
+                </Link>
+            </li>
+        </ul>
+      </div>
     </nav>
   );
 }

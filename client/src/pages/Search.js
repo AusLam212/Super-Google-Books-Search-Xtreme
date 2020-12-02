@@ -30,7 +30,6 @@ function Search() {
   function handleSave(result) {
     console.log(result)
     API.saveBook({
-      bookid: result.id,
       title: result.volumeInfo.title,
       authors: result.volumeInfo.authors,
       description: result.volumeInfo.description,
@@ -58,7 +57,6 @@ function Search() {
         books.map(book => (
           <SearchedBook
             key={book.id}
-            id={book.id}
             title={book.volumeInfo.title}
             authors={book.volumeInfo.authors}
             description={book.volumeInfo.description}

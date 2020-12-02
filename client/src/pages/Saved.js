@@ -38,14 +38,12 @@ function Saved() {
             {saved.length ? (
                 saved.map(book => (
                     <SavedBook
-                        key={book.bookid}
-                        id={book.bookid}
                         title={book.title}
                         authors={book.author}
                         description={book.description}
                         link={book.link}
                     >
-                        <button  className="btn btn-danger" style={{ marginLeft: "10px" }} onClick={() => deleteBook(book.bookid)} >
+                        <button  className="btn btn-danger" style={{ marginLeft: "10px" }} onClick={() => deleteBook(book._id)} >
                             Delete
                         </button>
                     </SavedBook>
