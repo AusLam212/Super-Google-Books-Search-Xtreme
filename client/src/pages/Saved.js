@@ -14,6 +14,7 @@ function Saved() {
     function loadBooks() {
         API.savedBooks()
             .then(res => {
+                console.log();
                 setSaved(res.data);
             })
             .catch(err => console.log(err))
@@ -21,6 +22,8 @@ function Saved() {
 
     function deleteBook(id) {
         API.deleteBook(id)
+          .then(console.log(typeof id))
+          .then(console.log(id))
           .then(res => loadBooks())
           .catch(err => console.log(err));
       }
