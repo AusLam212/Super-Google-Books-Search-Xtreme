@@ -41,6 +41,7 @@ function Saved() {
             {saved.length ? (
                 saved.map(book => (
                     <SavedBook
+                        key={book._id}
                         title={book.title}
                         authors={book.author}
                         description={book.description}
